@@ -1,0 +1,20 @@
+.card {
+  position: relative;
+  display: inline-block;
+  margin:10px;
+  border-radius: 5px;
+}
+
+img {
+  width: 100%;
+  
+}
+.card-title{
+  text-align: center;
+}
+body{
+  background-image: url('../images/img1.jpg');
+}
+.active{
+  margin-left:40px;
+}
