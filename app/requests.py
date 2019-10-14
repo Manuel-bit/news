@@ -2,14 +2,15 @@ import urllib.request,json
 from .models import Article,Sources
 from config import Config
 
-news_url = Config.NEWS_URL
+headlines_url = Config.HEADLINES_URL
 source_url = Config.SOURCE_URL
+news_url = Config.NEWS_URL
 
 def getHeadlines():
   '''
   function that gets json response
   '''
-  with urllib.request.urlopen(news_url+'281dbdc2e10e4a6ab51a9a27a614c146')as url:
+  with urllib.request.urlopen(headlines_url+'281dbdc2e10e4a6ab51a9a27a614c146')as url:
     headlines_data = url.read()
     headlines_response = json.loads(headlines_data)
 
@@ -23,7 +24,7 @@ def getHeadlines():
 
 def process_results(headlines_list):
 
-  headlines_result = []
+  headlines_results = []
   for headlines in headlines_list:
     author = headlines.get('author')
     title = headlines.get('title')
@@ -34,43 +35,43 @@ def process_results(headlines_list):
 
     if title:
       headline_object = Article(author,title,description,url,urlToImage,publishedAt)
-      headlines_result.append(headline_object)
+      headlines_results.append(headline_object)
 
-  return headlines_result
-
-
-# def fetchSources():
-#   '''
-#   function that fetches news Sources from nes api
-#   '''
-#   with urllib.request.urlopen(source_url+'281dbdc2e10e4a6ab51a9a27a614c146')as url:
-#     source_data = url.read()
-#     source_response = json.loads(source_data)
-
-#     source_results = None
-
-#     if source_response['sources']:
-#       source_result_list = source_response['sources']
-#       source_results = process_results(source_result_list)
-       
-#   return source_results
-
-# def process_results(source_list):
-
-#   source_result = []
-#   for sources in source_list:
-#     id =  sources.get('id')
-#     name = sources.get('name')
-#     description = sources.get('description')
-#     url = sources.get('url')
-#     category = sources.get('category')
-#     language = sources.get('language')
-
-#     if language:
-#       source_object = Sources(id,name,description,url,category,language)
-#       source_result.append(source_object)
-
-#   return source_result
+  return headlines_results
 
 
 
+
+def getNews():
+  '''
+  function that fetches all news
+  '''
+
+  with urllib.request.urlopen(news_url+'281dbdc2e10e4a6ab51a9a27a614c146') as me:
+    news_data = me.read()
+    news_response = json.loads(news_data)
+
+    all_news = None
+
+    if news_response['articles']:
+      all_news_list = news_response['articles']
+      all_news_data = process_news(all_news_list)
+
+  return all_news
+
+def process_news(news_list):
+  
+  all_news = []
+  for news in news_list:
+    author = news.get('author')
+    title = news.get('title')
+    description = news.get('description')
+    url = news.get('url')
+    urlToImage = news.get('urlToImage')
+    publishedAt = news.get('publishedAt')
+
+    if author:
+      news_object = Article(author,title,description,url,urlToImage,publishedAt)
+      all_news.append(news_object)
+
+  return all_news
