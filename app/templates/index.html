@@ -1,19 +1,19 @@
 {% extends 'base.html' %}
 {% block content %}
 
-  {% for article in headlines %}
+  {% for myNews in news %}
   
   <div class='card' style="width:30%">
-    <img class='card-img-top' src='{{article.urlToImage}}'>
+    <img class='card-img-top' src='{{myNews.urlToImage}}'>
     <div class='card-body'>
-      <div class='card-title' style='color:olivedrab;'>{{ article.title}}</div>
+      <div class='card-title' style='color:olivedrab;'>{{ myNews.title}}</div>
       <div class='card-text'>
-        {{article.description}}<br>
-        <p style='color:olivedrab;'>Author: {{article.author}}</p>
+        {{myNews.description}}<br>
+        <p style='color:olivedrab;'>Author: {{myNews.author}}</p>
       </div>
     </div>
     <div class='card-footer'>
-      <a href='{{article.url}}'>view full article</a>
+      <a href='{{myNews.url}}'>view full article</a>
     </div>
   </div>
 
