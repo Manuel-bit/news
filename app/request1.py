@@ -3,6 +3,7 @@ from .models import Article,Sources
 from config import Config
 
 source_url = Config.SOURCE_URL
+news_api = Config.NEWS_API_KEY
 
 def fetchSources():
   '''

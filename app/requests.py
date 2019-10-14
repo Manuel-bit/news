@@ -5,12 +5,13 @@ from config import Config
 headlines_url = Config.HEADLINES_URL
 source_url = Config.SOURCE_URL
 news_url = Config.NEWS_URL
+news_api = Config.NEWS_API_KEY
 
 def getHeadlines():
   '''
   function that gets json response
   '''
-  with urllib.request.urlopen(headlines_url+'281dbdc2e10e4a6ab51a9a27a614c146')as url:
+  with urllib.request.urlopen(headlines_url+news_api)as url:
     headlines_data = url.read()
     headlines_response = json.loads(headlines_data)
 
@@ -47,7 +48,7 @@ def getNews():
   function that fetches all news
   '''
 
-  with urllib.request.urlopen(news_url+'281dbdc2e10e4a6ab51a9a27a614c146') as url:
+  with urllib.request.urlopen(news_url+news_api) as url:
     news_data = url.read()
     news_response = json.loads(news_data)
 
