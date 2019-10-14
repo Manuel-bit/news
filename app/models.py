@@ -1,3 +1,4 @@
+
 class Article:
   '''
   class that defines the artivle blueprint

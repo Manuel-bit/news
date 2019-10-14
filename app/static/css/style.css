@@ -18,3 +18,15 @@ body{
 .active{
   margin-left:40px;
 }
+a{
+  font-family: 'Permanent Marker', cursive;
+}
+h1{
+  font-family: 'Fascinate Inline', cursive;
+  text-align: center;
+  color: olivedrab;
+}
+hr{
+  color: olivedrab
+  
+}

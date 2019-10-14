@@ -47,8 +47,8 @@ def getNews():
   function that fetches all news
   '''
 
-  with urllib.request.urlopen(news_url+'281dbdc2e10e4a6ab51a9a27a614c146') as me:
-    news_data = me.read()
+  with urllib.request.urlopen(news_url+'281dbdc2e10e4a6ab51a9a27a614c146') as url:
+    news_data = url.read()
     news_response = json.loads(news_data)
 
     all_news = None
@@ -57,11 +57,11 @@ def getNews():
       all_news_list = news_response['articles']
       all_news_data = process_news(all_news_list)
 
-  return all_news
+  return all_news_data
 
 def process_news(news_list):
   
-  all_news = []
+  all_news_data = []
   for news in news_list:
     author = news.get('author')
     title = news.get('title')
@@ -70,8 +70,8 @@ def process_news(news_list):
     urlToImage = news.get('urlToImage')
     publishedAt = news.get('publishedAt')
 
-    if author:
+    if title:
       news_object = Article(author,title,description,url,urlToImage,publishedAt)
-      all_news.append(news_object)
+      all_news_data.append(news_object)
 
-  return all_news
+  return all_news_data
