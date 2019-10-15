@@ -1,4 +1,6 @@
 import os
+from dotenv import load_dotenv
+load_dotenv()
 
 class Config:
   '''
@@ -13,13 +15,11 @@ class ProdConfig(Config):
   '''
   class that contain configuarations during production
   '''
-  NEWS_API_KEY = os.environ.get('NEWS_API_KEY')
   DEBUG = False
 class DevConfig(Config):
   '''
   class that contains configuarations during development
   '''
-  NEWS_API_KEY = os.environ.get('NEWS_API_KEY')
   DEBUG = True
 
 config_options ={
